@@ -8,7 +8,6 @@ FROM [Portfolio_project].[dbo].[Nashvillehousing]
 ALTER table Nashvillehousing
 add convertedsaledsate date;
 
-
 UPDATE Nashvillehousing
 SET convertedsaledsate=CONVERT(Date,SaleDate)
 
@@ -33,7 +32,7 @@ and a.UniqueId <>b.UniqueId
 where a.PropertyAddress is NULL
 
 
-/***Addresss format***/
+/***Address formating***/
 
 --SUBSTRING
 
@@ -46,21 +45,16 @@ from Nashvillehousing
 ALTER table Nashvillehousing
 add propertysplitaddress nvarchar(255);
 
-
 UPDATE Nashvillehousing
 SET propertysplitaddress=SUBSTRING(PropertyAddress,1,CHARINDEX(',',PropertyAddress)-1)
 
 ALTER table Nashvillehousing
 add propertysplitcity nvarchar(255);
 
-
 UPDATE Nashvillehousing
 SET propertysplitcity=SUBSTRING(PropertyAddress,CHARINDEX(',',PropertyAddress)+1,LEN(PropertyAddress))
 
-select * from Nashvillehousing
-
----PARSENAME   
-
+---PARSENAME
 
 Select PARSENAME(OwnerAddress,1),
 PARSENAME(REPLACE(OwnerAddress, ',', '.') , 3)
@@ -116,7 +110,7 @@ from [Portfolio_project].[dbo].[Nashvillehousing]
 DELETE from  ROWNUMCTE
 where rown_num>1;
 
-/***DELETING unused columne***/
+/***DELETING unused column***/
 
 --SELECT * FROM  Nashvillehousing
 
